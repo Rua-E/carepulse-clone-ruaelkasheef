@@ -27,7 +27,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
+      <body 
+      // suppressHydrationWarning
         className={cn(
           "min-h-screen bg-dark-300 font-sans antialiased",
           fontSans.variable
@@ -40,4 +41,3 @@ export default function RootLayout({
     </html>
   );
 }
-

@@ -1,17 +1,21 @@
-import React from 'react'
-import { Button } from './ui/button';
 import Image from 'next/image';
+import { Button } from './ui/button';
+// import React from 'react'
 
 interface ButtonProps {
-    isLoading: boolean,
-    className?: string,
-    children: React.ReactNode,
+    isLoading: boolean;
+    className?: string;
+    children: React.ReactNode;
 }
 
 const SubmitButton = ({ isLoading, className, children }: ButtonProps) => {
   return (
     <div>
-      <Button type='submit' disabled={isLoading} className={className ?? 'shad-primary-btn w-full'} >
+      <Button 
+          type='submit' 
+          disabled={isLoading} 
+          className={className ?? 'shad-primary-btn w-full'} 
+          >
         {isLoading ? (
           <div className='flex items-center gap-4'>
             <Image 
@@ -23,10 +27,12 @@ const SubmitButton = ({ isLoading, className, children }: ButtonProps) => {
               />
               Loading...
           </div>
-        ) : (children)}
+        ) : (
+          children
+          )}
       </Button>
     </div>
-  )
-}
+  );
+};
 
 export default SubmitButton;
