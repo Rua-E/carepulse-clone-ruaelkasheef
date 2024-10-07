@@ -28,7 +28,6 @@ const PatientForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  // 1. Define your form.
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
@@ -38,12 +37,11 @@ const PatientForm = () => {
     },
   });
 
-  // 2. Define a submit handler.
   async function onSubmit({ name, email, phone }: z.infer<typeof UserFormValidation>) {
     setIsLoading(true);
 
     try {
-      const userData = { name, email, phone }
+      const userData = { name, email, phone };
 
       const user = await createUser(userData);
 
@@ -53,8 +51,6 @@ const PatientForm = () => {
     } catch (error) {
       console.log(error);
     }
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
   };
 
 
