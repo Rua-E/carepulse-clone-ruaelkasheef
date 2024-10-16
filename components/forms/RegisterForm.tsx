@@ -19,6 +19,7 @@ import { Doctors, GenderOptions, IdentificationTypes } from "@/constants";
 import { Label } from "@radix-ui/react-label";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
+import FileUploader from "../FileUploader";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -78,7 +79,10 @@ const RegisterForm = ({ user }: { user: User }) => {
                     ></CustomFormField>
 
 {/* EMAIL & PHONE */}
-        <div className="flex flex-col gap-6 xl:flex-row">
+        <div className="
+        flex flex-col gap-4 
+        xl:grid grid-cols-2
+        ">
                 <CustomFormField
                     fieldType={FormFieldType.INPUT}
                     control={form.control}
@@ -131,10 +135,13 @@ const RegisterForm = ({ user }: { user: User }) => {
                             </RadioGroup>
                         </FormControl>
                     )}
-                    ></CustomFormField>
+                ></CustomFormField>
         </div>
 
-        <div className="flex flex-col gap-6 xl:flex-row">
+        <div className="
+            flex flex-col gap-4 
+            xl:grid grid-cols-2
+            ">
             <CustomFormField
                     fieldType={FormFieldType.INPUT}
                     control={form.control}
@@ -153,8 +160,11 @@ const RegisterForm = ({ user }: { user: User }) => {
         </div>
 
 
-        <div className="flex flex-col gap-6 xl:flex-row">
-        <CustomFormField
+        <div className="
+            flex flex-col gap-4 
+            xl:grid grid-cols-2
+            ">
+            <CustomFormField
                     fieldType={FormFieldType.INPUT}
                     control={form.control}
                     name="emergencyContactName"
@@ -162,13 +172,13 @@ const RegisterForm = ({ user }: { user: User }) => {
                     placeholder="Guardian's name"
                     ></CustomFormField>
 
-                <CustomFormField 
-                    fieldType={FormFieldType.PHONE_INPUT}
-                    control={form.control}
-                    name="emergencyContactNumber"
-                    label="Emergency contact number"
-                    placeholder="(555) 555-5555"
-                    ></CustomFormField>
+            <CustomFormField 
+                fieldType={FormFieldType.PHONE_INPUT}
+                control={form.control}
+                name="emergencyContactNumber"
+                label="Emergency contact number"
+                placeholder="(555) 555-5555"
+                ></CustomFormField>
         </div>
 
       
@@ -209,7 +219,10 @@ const RegisterForm = ({ user }: { user: User }) => {
                 ))}
             </CustomFormField>
 
-        <div className="flex flex-col gap-6 xl:flex-row">
+        <div className="
+            flex flex-col gap-4 
+            xl:grid grid-cols-2
+            ">
             <CustomFormField
                     fieldType={FormFieldType.INPUT}
                     control={form.control}
@@ -227,7 +240,10 @@ const RegisterForm = ({ user }: { user: User }) => {
                     ></CustomFormField>     
         </div>
         
-        <div className="flex flex-col gap-6 xl:flex-row">
+        <div className="
+            flex flex-col gap-4 
+            xl:grid grid-cols-2
+            ">
             <CustomFormField
                     fieldType={FormFieldType.TEXTAREA}
                     control={form.control}
@@ -245,7 +261,10 @@ const RegisterForm = ({ user }: { user: User }) => {
                     ></CustomFormField>     
         </div>
 
-        <div className="flex flex-col gap-6 xl:flex-row">
+        <div className="
+            flex flex-col gap-4 
+            xl:grid grid-cols-2
+            ">
             <CustomFormField
                     fieldType={FormFieldType.TEXTAREA}
                     control={form.control}
@@ -269,7 +288,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             </div>
         </section>
 
-        <CustomFormField 
+            <CustomFormField 
                 fieldType={FormFieldType.SELECT}
                 control={form.control}
                 name="identificationType"
@@ -282,6 +301,56 @@ const RegisterForm = ({ user }: { user: User }) => {
                     </SelectItem>
                 ))}
             </CustomFormField>
+
+            <CustomFormField
+                fieldType={FormFieldType.INPUT}
+                control={form.control}
+                name="identificationNumber"
+                label="Identification Number"
+                placeholder="123456789"
+            ></CustomFormField>
+
+            <CustomFormField 
+                fieldType={FormFieldType.SKELETON}
+                control={form.control}
+                name="identificationDocument"
+                label="Scanned copy of identification document"
+                renderSkeleton={(field) => (
+                    <FormControl>
+                        <FileUploader 
+                            files={field.value} 
+                            onChange={field.onChange}
+                        ></FileUploader>
+                    </FormControl>
+                )}
+            ></CustomFormField>
+        <section className="space-y-6">
+            <div className="mb-9 space-y-1">
+                <h2 className="sub-header">Consent and Privacy</h2>
+            </div>
+        </section>
+
+        <CustomFormField
+            fieldType={FormFieldType.CHECKBOX}
+            control={form.control}
+            name="treatmentConsent"
+            label="I consent to treatment"
+            >
+        </CustomFormField>
+        <CustomFormField
+            fieldType={FormFieldType.CHECKBOX}
+            control={form.control}
+            name="disclosureConsent"
+            label="I consent to disclosure of information"
+            >
+        </CustomFormField>
+        <CustomFormField
+            fieldType={FormFieldType.CHECKBOX}
+            control={form.control}
+            name="privacyConsent"
+            label="I consent to privacy policy"
+            >
+        </CustomFormField>
 
       <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
     </form>
