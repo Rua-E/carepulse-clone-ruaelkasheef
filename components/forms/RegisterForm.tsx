@@ -15,7 +15,7 @@ import CustomFormField from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { FormFieldType } from "./PatientForm";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Doctors, GenderOptions } from "@/constants";
+import { Doctors, GenderOptions, IdentificationTypes } from "@/constants";
 import { Label } from "@radix-ui/react-label";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
@@ -63,9 +63,9 @@ const RegisterForm = ({ user }: { user: User }) => {
 
       <section className="space-y-6">
         <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Personal Information.</h2>
+            <h2 className="sub-header">Personal Information</h2>
         </div>
-
+    </section>
 {/* NAME */}
                 <CustomFormField 
                     fieldType={FormFieldType.INPUT}
@@ -171,11 +171,11 @@ const RegisterForm = ({ user }: { user: User }) => {
                     ></CustomFormField>
         </div>
 
-         </section>
+      
 
           <section className="space-y-6">
             <div className="mb-9 space-y-1">
-                <h2 className="sub-header">Medical Information.</h2>
+                <h2 className="sub-header">Medical Information</h2>
             </div>
         </section>
 
@@ -209,18 +209,79 @@ const RegisterForm = ({ user }: { user: User }) => {
                 ))}
             </CustomFormField>
 
-
-
         <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+                    fieldType={FormFieldType.INPUT}
+                    control={form.control}
+                    name="insuranceProvider"
+                    label="Insurance provider"
+                    placeholder="BlueCross BlueShield"
+                    ></CustomFormField>
 
+            <CustomFormField
+                    fieldType={FormFieldType.INPUT}
+                    control={form.control}
+                    name="insurancePolicyNumber"
+                    label="Insurance policy number"
+                    placeholder="ABC123456789"
+                    ></CustomFormField>     
+        </div>
+        
+        <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+                    fieldType={FormFieldType.TEXTAREA}
+                    control={form.control}
+                    name="allergies"
+                    label="Allergies (if any)"
+                    placeholder="Peanuts, Penicillin, Pollen"
+                    ></CustomFormField>
+
+            <CustomFormField
+                    fieldType={FormFieldType.TEXTAREA}
+                    control={form.control}
+                    name="currentMedication"
+                    label="Current medication (if any)"
+                    placeholder="Ibuprofen 200mg, Paracetamol 500mg"
+                    ></CustomFormField>     
         </div>
 
-
         <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+                    fieldType={FormFieldType.TEXTAREA}
+                    control={form.control}
+                    name="familyMedicalHistory"
+                    label="Family medical history"
+                    placeholder="Mother had brain cancer, Father had heart disease"
+                    ></CustomFormField>
 
+            <CustomFormField
+                    fieldType={FormFieldType.TEXTAREA}
+                    control={form.control}
+                    name="pastMedicalHistory"
+                    label="Past medical history"
+                    placeholder="Appendectomy, Tonsillectomy"
+                    ></CustomFormField>     
         </div>
 
+        <section className="space-y-6">
+            <div className="mb-9 space-y-1">
+                <h2 className="sub-header">Identification and Verification.</h2>
+            </div>
+        </section>
 
+        <CustomFormField 
+                fieldType={FormFieldType.SELECT}
+                control={form.control}
+                name="identificationType"
+                label="Identification Type"
+                placeholder="Select an identification type"
+            >
+                {IdentificationTypes.map((type) => (
+                    <SelectItem key={type} value={type}>
+                           {type} 
+                    </SelectItem>
+                ))}
+            </CustomFormField>
 
       <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
     </form>
